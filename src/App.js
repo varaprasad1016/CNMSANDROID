@@ -138,60 +138,130 @@ function App() {
 
   // Show main app if authenticated
   return (
-    <div className="app">
-      <header className="header">
-        <div className="header-content">
-          <div className="header-title">
-            <h1>Vehicle Tracker {currentUser?.demoMode ? '- Demo Mode' : ''}</h1>
-            <p>{currentUser?.demoMode ? 'Using simulated data' : 'Connected to NeatCCTV GPS System'}</p>
+    <div className="telematics-app">
+      {/* Top Header */}
+      <header className="telematics-header">
+        <div className="header-left">
+          <div className="logo-section">
+            <h1>🚛 NeatTelematics</h1>
+            <span className="version-badge">{currentUser?.demoMode ? 'DEMO' : 'LIVE'}</span>
           </div>
-          <div className="header-user">
-            <span>👤 {currentUser?.username || 'User'}</span>
-            <button onClick={handleLogout} className="logout-button">
-              Logout
-            </button>
+        </div>
+        <div className="header-center">
+          <div className="search-bar">
+            <input 
+              type="text" 
+              placeholder="Search vehicles, drivers, routes..." 
+              disabled 
+              title="Search functionality coming soon"
+            />
+            <button disabled title="Search functionality coming soon">🔍</button>
+          </div>
+        </div>
+        <div className="header-right">
+          <div className="header-actions">
+            <button className="notification-btn" title="Notifications">🔔 <span className="badge">3</span></button>
+            <button className="alert-btn" title="Active Alerts">⚠️ <span className="badge">2</span></button>
+            <div className="user-profile">
+              <div className="profile-avatar">
+                {(currentUser?.username || 'User').charAt(0).toUpperCase()}
+              </div>
+              <div className="user-info">
+                <span className="username">{currentUser?.username || 'User'}</span>
+                <span className="user-role">Fleet Manager</span>
+              </div>
+              <button onClick={handleLogout} className="logout-btn" title="Logout">⏻</button>
+            </div>
           </div>
         </div>
       </header>
-      
-      <div className="content">
-        {renderContent()}
-      </div>
 
-      <nav className="bottom-nav">
-        <button 
-          className={`nav-button ${activeTab === 'dashboard' ? 'active' : ''}`}
-          onClick={() => setActiveTab('dashboard')}
-        >
-          📊 Dashboard
-        </button>
-        <button 
-          className={`nav-button ${activeTab === 'map' ? 'active' : ''}`}
-          onClick={() => setActiveTab('map')}
-        >
-          🗺️ Map
-        </button>
-        <button 
-          className={`nav-button ${activeTab === 'video' ? 'active' : ''}`}
-          onClick={() => setActiveTab('video')}
-        >
-          📹 Video
-        </button>
-        <button 
-          className={`nav-button ${activeTab === 'devices' ? 'active' : ''}`}
-          onClick={() => setActiveTab('devices')}
-        >
-          📱 Devices
-        </button>
-        <button 
-          className={`nav-button ${activeTab === 'settings' ? 'active' : ''}`}
-          onClick={() => setActiveTab('settings')}
-        >
-          ⚙️ Settings
-        </button>
-      </nav>
+      <div className="telematics-body">
+        {/* Sidebar Navigation */}
+        <nav className="telematics-sidebar">
+          <div className="sidebar-menu">
+            <button 
+              className={`sidebar-item ${activeTab === 'dashboard' ? 'active' : ''}`}
+              onClick={() => setActiveTab('dashboard')}
+            >
+              <span className="icon">📊</span>
+              <span className="label">Dashboard</span>
+            </button>
+            <button 
+              className={`sidebar-item ${activeTab === 'map' ? 'active' : ''}`}
+              onClick={() => setActiveTab('map')}
+            >
+              <span className="icon">🗺️</span>
+              <span className="label">Live Tracking</span>
+            </button>
+            <button 
+              className={`sidebar-item ${activeTab === 'video' ? 'active' : ''}`}
+              onClick={() => setActiveTab('video')}
+            >
+              <span className="icon">📹</span>
+              <span className="label">Video Monitoring</span>
+            </button>
+            <button 
+              className={`sidebar-item ${activeTab === 'devices' ? 'active' : ''}`}
+              onClick={() => setActiveTab('devices')}
+            >
+              <span className="icon">📱</span>
+              <span className="label">Fleet Management</span>
+            </button>
+            <button 
+              className={`sidebar-item ${activeTab === 'settings' ? 'active' : ''}`}
+              onClick={() => setActiveTab('settings')}
+            >
+              <span className="icon">⚙️</span>
+              <span className="label">Settings</span>
+            </button>
+          </div>
+          
+          <div className="sidebar-footer">
+            <div className="connection-status">
+              <div className="status-indicator online"></div>
+              <span>System Online</span>
+            </div>
+            <div className="fleet-summary">
+              <div className="fleet-stat">
+                <span className="stat-value">12</span>
+                <span className="stat-label">Active Vehicles</span>
+              </div>
+              <div className="fleet-stat">
+                <span className="stat-value">2</span>
+                <span className="stat-label">Alerts</span>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        {/* Main Content Area */}
+        <main className="telematics-content">
+          <div className="content-header">
+            <h2>{getPageTitle()}</h2>
+            <div className="content-actions">
+              <button className="refresh-btn">🔄 Refresh</button>
+              <button className="export-btn">📤 Export</button>
+            </div>
+          </div>
+          <div className="content-body">
+            {renderContent()}
+          </div>
+        </main>
+      </div>
     </div>
   );
+
+  function getPageTitle() {
+    switch (activeTab) {
+      case 'dashboard': return 'Fleet Overview Dashboard';
+      case 'map': return 'Live Vehicle Tracking';
+      case 'video': return 'Video Monitoring Center';
+      case 'devices': return 'Fleet & Device Management';
+      case 'settings': return 'System Settings';
+      default: return 'Fleet Overview Dashboard';
+    }
+  }
 }
 
 export default App;
