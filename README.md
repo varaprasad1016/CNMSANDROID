@@ -43,14 +43,11 @@ A professional Android application for vehicle tracking and fleet management, co
 
 ## Setup Instructions
 
-### Prerequisites
+This project contains both the Android application and a web demo that showcases its functionality.
 
-1. **Android Studio**: Latest stable version (Hedgehog or newer)
-2. **Android SDK**: API level 34 (Android 14)
-3. **Google Maps API Key**: Required for map functionality
-4. **CMSV6/CNMS Server**: Access to a compatible server
+### Option 1: Web Demo (Browser Preview)
 
-### Installation Steps
+**For immediate preview and testing:**
 
 1. **Clone the Repository**
    ```bash
@@ -58,7 +55,38 @@ A professional Android application for vehicle tracking and fleet management, co
    cd androidapptrial
    ```
 
-2. **Configure Google Maps API**
+2. **Install Dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start Web Demo**
+   ```bash
+   npm start
+   ```
+   The web demo will be available at `http://localhost:5000`
+
+**Features Available in Web Demo:**
+- 📊 Dashboard with live metrics and vehicle status
+- 🗺️ Interactive map with real-time vehicle tracking
+- 📹 Video streaming interface (simulated)
+- 📱 Device management and monitoring
+- ⚙️ Settings configuration
+
+### Option 2: Android Development
+
+**For full Android app development:**
+
+#### Prerequisites
+
+1. **Android Studio**: Latest stable version (Hedgehog or newer)
+2. **Android SDK**: API level 34 (Android 14)
+3. **Google Maps API Key**: Required for map functionality
+4. **CMSV6/CNMS Server**: Access to a compatible server
+
+#### Installation Steps
+
+1. **Configure Google Maps API**
    - Go to [Google Cloud Console](https://console.cloud.google.com/)
    - Create a new project or select existing one
    - Enable "Maps SDK for Android" and "Places API"
@@ -68,16 +96,35 @@ A professional Android application for vehicle tracking and fleet management, co
      GOOGLE_MAPS_API_KEY=your_actual_api_key_here
      ```
 
-3. **Open in Android Studio**
+2. **Open in Android Studio**
    - Open Android Studio
    - Select "Open an existing project"
    - Navigate to the project directory
    - Wait for Gradle sync to complete
 
-4. **Build and Run**
+3. **Build and Run**
    - Connect an Android device or start an emulator
    - Click "Run" or press Ctrl+R (Cmd+R on Mac)
    - Grant required permissions when prompted
+
+### Option 3: CI/CD Build (GitHub Actions)
+
+**Automated APK builds:**
+
+1. **Set up GitHub Secrets**
+   - Go to your repository settings
+   - Navigate to Secrets and Variables > Actions
+   - Add secret: `GOOGLE_MAPS_API_KEY` with your API key
+
+2. **Trigger Build**
+   - Push to `main` or `develop` branch
+   - Or create a pull request
+   - GitHub Actions will automatically build the APK
+
+3. **Download APK**
+   - Go to Actions tab in your repository
+   - Select the latest workflow run
+   - Download the `vehicle-tracker-debug` artifact
 
 ### Configuration
 
