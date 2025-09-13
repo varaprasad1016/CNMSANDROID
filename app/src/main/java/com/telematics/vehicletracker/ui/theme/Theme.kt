@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import com.telematics.vehicletracker.BuildConfig
 
 private val DarkColorScheme = darkColorScheme(
     primary = PrimaryBlue,
@@ -26,6 +27,38 @@ private val DarkColorScheme = darkColorScheme(
     onTertiary = White,
     onBackground = LightGray,
     onSurface = LightGray,
+    error = ErrorRed,
+    onError = White
+)
+
+// Amman CCTV specific dark color scheme
+private val AmmanCctvDarkColorScheme = darkColorScheme(
+    primary = PrimaryBlueDark,
+    secondary = SecondaryTealDark,
+    tertiary = AccentRed,
+    background = Black,
+    surface = DarkGray,
+    onPrimary = White,
+    onSecondary = White,
+    onTertiary = White,
+    onBackground = LightGray,
+    onSurface = White,
+    error = ErrorRed,
+    onError = White
+)
+
+// NeatTelematics specific light color scheme
+private val NeatTelematicsLightColorScheme = lightColorScheme(
+    primary = PrimaryBlue,
+    secondary = SecondaryTeal,
+    tertiary = AccentGreen,
+    background = LightBackground,
+    surface = White,
+    onPrimary = White,
+    onSecondary = White,
+    onTertiary = White,
+    onBackground = DarkGray,
+    onSurface = DarkGray,
     error = ErrorRed,
     onError = White
 )
@@ -52,21 +85,34 @@ fun VehicleTrackerTheme(
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
+    // Detect current build flavor
+    val isAmmanCctv = BuildConfig.FLAVOR == "ammanCctv"
+    val isNeatTelematics = BuildConfig.FLAVOR == "neatTelematics"
+    
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
-
+        
+        // Amman CCTV always uses dark theme
+        isAmmanCctv -> AmmanCctvDarkColorScheme
+        
+        // NeatTelematics uses light theme by default
+        isNeatTelematics && !darkTheme -> NeatTelematicsLightColorScheme
+        
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
+    
+    // Force dark theme for Amman CCTV
+    val effectiveDarkTheme = if (isAmmanCctv) true else darkTheme
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
             window.statusBarColor = colorScheme.primary.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = effectiveDarkTheme
         }
     }
 

@@ -20,6 +20,32 @@ android {
         }
     }
 
+    flavorDimensions "brand"
+    
+    productFlavors {
+        neatTelematics {
+            dimension "brand"
+            applicationId "com.telematics.vehicletracker"
+            versionNameSuffix "-neat"
+            manifestPlaceholders = [
+                appName: "NeatTelematics",
+                appIcon: "@mipmap/ic_launcher_neat",
+                googleMapsApiKey: "NEAT_TELEMATICS_GOOGLE_MAPS_API_KEY"
+            ]
+        }
+        
+        ammanCctv {
+            dimension "brand"
+            applicationId "com.telematics.vehicletracker.amman"
+            versionNameSuffix "-amman"
+            manifestPlaceholders = [
+                appName: "Amman CCTV",
+                appIcon: "@mipmap/ic_launcher_amman",
+                googleMapsApiKey: "AMMAN_CCTV_GOOGLE_MAPS_API_KEY"
+            ]
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false

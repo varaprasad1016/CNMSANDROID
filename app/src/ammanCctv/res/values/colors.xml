@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Amman CCTV Dark Theme Colors matching the screenshots -->
+    
+    <!-- Primary Colors - Dark theme with blue accents -->
+    <color name="primary_blue">#FF2196F3</color>
+    <color name="primary_blue_dark">#FF1565C0</color>
+    <color name="primary_blue_light">#FF64B5F6</color>
+    
+    <!-- Background Colors - Dark like screenshots -->
+    <color name="background_primary">#FF121212</color>
+    <color name="background_secondary">#FF1E1E1E</color>
+    <color name="background_card">#FF2D2D2D</color>
+    <color name="background_elevated">#FF373737</color>
+    
+    <!-- Surface Colors -->
+    <color name="surface_primary">#FF1E1E1E</color>
+    <color name="surface_secondary">#FF2D2D2D</color>
+    <color name="surface_elevated">#FF373737</color>
+    
+    <!-- Text Colors -->
+    <color name="text_primary">#FFFFFFFF</color>
+    <color name="text_secondary">#FFB3B3B3</color>
+    <color name="text_tertiary">#FF7A7A7A</color>
+    
+    <!-- Status Colors matching screenshots -->
+    <color name="status_running">#FF4CAF50</color>
+    <color name="status_stopped">#FFE57373</color>
+    <color name="status_idle">#FFFF9800</color>
+    <color name="status_inactive">#FF9E9E9E</color>
+    
+    <!-- Accent Colors -->
+    <color name="accent_green">#FF00E676</color>
+    <color name="accent_orange">#FFFF9800</color>
+    <color name="accent_red">#FFF44336</color>
+    <color name="accent_blue">#FF2196F3</color>
+    
+    <!-- Vehicle Status Indicator Colors -->
+    <color name="vehicle_online">#FF4CAF50</color>
+    <color name="vehicle_offline">#FF757575</color>
+    <color name="vehicle_warning">#FFFF9800</color>
+    <color name="vehicle_recording">#FFFF5722</color>
+    
+    <!-- Bottom Navigation -->
+    <color name="bottom_nav_background">#FF1E1E1E</color>
+    <color name="bottom_nav_selected">#FF2196F3</color>
+    <color name="bottom_nav_unselected">#FF757575</color>
+    
+    <!-- Card and Button Colors -->
+    <color name="card_background">#FF2D2D2D</color>
+    <color name="button_primary">#FF2196F3</color>
+    <color name="button_secondary">#FF424242</color>
+    
+    <!-- Border and Divider Colors -->
+    <color name="border_color">#FF424242</color>
+    <color name="divider_color">#FF303030</color>
+</resources>

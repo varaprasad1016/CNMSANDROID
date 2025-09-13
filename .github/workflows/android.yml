@@ -39,20 +39,29 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
-    - name: Build debug APK
-      run: ./gradlew assembleDebug
+    - name: Build NeatTelematics debug APK
+      run: ./gradlew assembleNeatTelematicsDebug
+
+    - name: Build Amman CCTV debug APK
+      run: ./gradlew assembleAmmanCctvDebug
 
     - name: Build test APK
       run: ./gradlew assembleAndroidTest
 
     - name: Run unit tests
-      run: ./gradlew testDebugUnitTest
+      run: ./gradlew testNeatTelematicsDebugUnitTest
 
-    - name: Upload APK
+    - name: Upload NeatTelematics APK
       uses: actions/upload-artifact@v3
       with:
-        name: vehicle-tracker-debug
-        path: app/build/outputs/apk/debug/app-debug.apk
+        name: neat-telematics-debug
+        path: app/build/outputs/apk/neatTelematics/debug/app-neatTelematics-debug.apk
+
+    - name: Upload Amman CCTV APK
+      uses: actions/upload-artifact@v3
+      with:
+        name: amman-cctv-debug
+        path: app/build/outputs/apk/ammanCctv/debug/app-ammanCctv-debug.apk
 
     - name: Upload mapping file
       uses: actions/upload-artifact@v3
@@ -64,6 +73,11 @@ jobs:
       if: always()
       run: |
         echo "## Build Report" >> $GITHUB_STEP_SUMMARY
-        echo "- APK built successfully" >> $GITHUB_STEP_SUMMARY
-        echo "- APK size: $(ls -lh app/build/outputs/apk/debug/app-debug.apk | awk '{print $5}')" >> $GITHUB_STEP_SUMMARY
+        echo "- Both APKs built successfully" >> $GITHUB_STEP_SUMMARY
+        if [ -f app/build/outputs/apk/neatTelematics/debug/app-neatTelematics-debug.apk ]; then
+          echo "- NeatTelematics APK size: $(ls -lh app/build/outputs/apk/neatTelematics/debug/app-neatTelematics-debug.apk | awk '{print $5}')" >> $GITHUB_STEP_SUMMARY
+        fi
+        if [ -f app/build/outputs/apk/ammanCctv/debug/app-ammanCctv-debug.apk ]; then
+          echo "- Amman CCTV APK size: $(ls -lh app/build/outputs/apk/ammanCctv/debug/app-ammanCctv-debug.apk | awk '{print $5}')" >> $GITHUB_STEP_SUMMARY
+        fi
         echo "- Build time: $(date)" >> $GITHUB_STEP_SUMMARY
